@@ -13,10 +13,10 @@ const Game = {
     frames: 0,
     player: undefined,
     keys: {
-      top: 38,
-      bottom: 40,
-      left: 37,
-      right: 39
+      top: 'w',
+      bottom: 's',
+      left: 'a',
+      right: 'd'
   },
 
     init(id) {
