@@ -39,10 +39,10 @@ class Enemy {
       this.enemyPos.x += this.speed
       
     }
-    changeDirection() {
-        this.speed *= -1
-        console.log("cambio dirección");
-    }
+  changeDirection() {
+    this.speed *= -1
+        
+  }
     
     
 }
