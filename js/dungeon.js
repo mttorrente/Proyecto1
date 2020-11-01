@@ -1,6 +1,6 @@
 class Wall {
     constructor(ctx, wallPosX, wallPosY,  wallWidth, wallHeight, wallImage) {
-        this.ctx = ctx
+        this.ctx = ctx;
         this.wallPos = {
           x: wallPosX,
           y: wallPosY

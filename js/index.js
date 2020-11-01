@@ -30,6 +30,8 @@ const Game = {
       this.setEventListeners()
       this.generateEnemy()
       this.createWall()
+      this.isCollision()
+      
     },
 
     setDimensions() {
@@ -40,11 +42,12 @@ const Game = {
     },
     
     setEventListeners() { 
-       document.onkeydown = e => {
+      document.onkeydown = e => {
+        console.log(this.isCollision()) 
        e.key === this.keys.top ? this.player.move('top'): null 
        e.key === this.keys.bottom ? this.player.move('bottom'): null
        e.key === this.keys.left ? this.player.move('left') :null
-       e.key === this.keys.right ? this.player.move('right') : null
+       e.key === this.keys.right && !this.isCollision() ? this.player.move('right') : null
       
       }
 
@@ -56,6 +59,7 @@ const Game = {
       const wall3 = new Wall(this.ctx, 700, 500, 70, 70, 'bricks.png')
 
       this.wall.push(wall1, wall2, wall3)
+      
    },
 
     createPlayer() {
@@ -86,5 +90,18 @@ const Game = {
       this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
     },
 
-    
+    isCollision() {
+      return this.wall.some(wall => {
+        console.log("MURO: " + wall.wallPos.x)
+        console.log("PLAYER PSUMA: " + (this.player.playerPos.x + this.player.playerSize.w))
+        console.log("PLAYER Y: " + this.player.playerPos.y)
+        console.log("MURO SUMA: " +  (wall.wallPos.x + wall.wallSize.w))
+        return (
+        
+          this.player.playerPos.x + this.player.playerSize.w >= wall.wallPos.x &&
+          this.player.playerPos.x < wall.wallPos.x + wall.wallSize.w
+        );   
+      });
+    }
+  
 } 
