@@ -11,6 +11,7 @@ class Player {
     },
     this.imageName = playerImage
     this.playerInstance = undefined
+    this.playerSpeed = 20
     this.init()
     
   }
@@ -42,9 +43,9 @@ class Player {
 
   move(dir) {
     
-    dir === 'top' ? this.playerPos.y -= 20 : null; 
-    dir === 'bottom' ? this.playerPos.y += 20 : null;
-    dir === 'left' ? this.playerPos.x -= 20 : null;
-    dir === 'right' ? this.playerPos.x += 20 : null;
+    dir === 'top' ? this.playerPos.y -= this.playerSpeed : null; 
+    dir === 'bottom' ? this.playerPos.y += this.playerSpeed  : null;
+    dir === 'left' ? this.playerPos.x -= this.playerSpeed  : null;
+    dir === 'right' ? this.playerPos.x += this.playerSpeed : null;
   }
 }
