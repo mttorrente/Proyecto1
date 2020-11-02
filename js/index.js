@@ -30,7 +30,7 @@ const Game = {
       this.setEventListeners()
       this.generateEnemy()
       this.createWall()
-      this.isCollision()
+     // this.isCollision()
       
     },
 
@@ -41,17 +41,53 @@ const Game = {
       this.canvasTag.setAttribute('height', this.canvasSize.h)
     },
     
-    setEventListeners() { 
-      document.onkeydown = e => {
-        console.log(this.isCollision()) 
-       e.key === this.keys.top ? this.player.move('top'): null 
-       e.key === this.keys.bottom ? this.player.move('bottom'): null
-       e.key === this.keys.left ? this.player.move('left') :null
-       e.key === this.keys.right && !this.isCollision() ? this.player.move('right') : null
-      
+  setEventListeners() {
+     let trackPosX = this.player.playerPos.x
+    let trackPosY = this.player.playerPos.y
+    console.log(this.player.playerPos.x)
+    document.onkeydown = e => {
+      //console.log(this.isCollision())
+      switch (e.key) {
+        case this.keys.top:
+                  
+          if (!this.touchesWalls({ ...this.player, playerPos:{x:trackPosX, y: this.player.playerPos.y }})) {
+            this.player.move('top')
+                        
+          }
+          break;
+        case this.keys.left:
+                    
+          if (!this.touchesWalls({ ...this.player, playerPos:{x:this.player.playerPos.x, y: trackPosY }})) {
+            this.player.move('left')
+                        
+          }
+          break;
+        case this.keys.right:
+                    
+          if (!this.touchesWalls({ ...this.player, playerPos:{x:this.player.playerPos.x, y: trackPosY }})) {
+            this.player.move('right')
+                       
+          }
+          break;
+        case this.keys.bottom:
+                   
+          if (!this.touchesWalls({ ...this.player, playerPos:{x:trackPosX, y: this.player.playerPos.y }})) {
+            this.player.move('bottom')
+                        
+          }
+          break;
+              
       }
+    }
+  },
+    //    e.key === this.keys.top && !this.touchesWalls() ? this.player.move('top'): null 
+    //    e.key === this.keys.bottom && !this.touchesWalls() ? this.player.move('bottom'): null
+    //    e.key === this.keys.left && !this.touchesWalls() ? this.player.move('left') :null
+    //    e.key === this.keys.right && !this.touchesWalls() ? this.player.move('right') : null
+      
+    //  }
 
-    },
+  
      
     createWall() {
       const wall1 = new Wall(this.ctx, 0, 0, 70, 70, 'bricks.png')
@@ -88,20 +124,23 @@ const Game = {
     
     clearScreen() {
       this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
+  },
+  touchesWalls(player) {
+       console.log("touche-player", player)
+       return this.wall.some(wall => this.isCollision(player, wall));
     },
 
-    isCollision() {
-      return this.wall.some(wall => {
-        console.log("MURO: " + wall.wallPos.x)
-        console.log("PLAYER PSUMA: " + (this.player.playerPos.x + this.player.playerSize.w))
-        console.log("PLAYER Y: " + this.player.playerPos.y)
-        console.log("MURO SUMA: " +  (wall.wallPos.x + wall.wallSize.w))
-        return (
-        
-          this.player.playerPos.x + this.player.playerSize.w >= wall.wallPos.x &&
-          this.player.playerPos.x < wall.wallPos.x + wall.wallSize.w
-        );   
-      });
+    isCollision(player, wall) {
+    console.log("isCollision- Player", player)
+      return (
+      
+        player.playerPos.x + player.playerSize.w >= wall.wallPos.x &&
+        player.playerPos.x < wall.wallPos.x + wall.wallSize.w &&
+        player.playerPos.y + player.playerSize.h >= wall.wallPos.y &&
+        player.playerPos.y < wall.wallPos.y + wall.wallSize.h
+      );
     }
+  
+  
   
 } 
