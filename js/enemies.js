@@ -30,9 +30,9 @@ class Enemy {
     this.ctx.drawImage(this.imageInstance, this.enemyPos.x, this.enemyPos.y, this.enemySize.w, this.enemySize.h)
   }
 
-  moveEnemy(choca) {
+  moveEnemy(crash) {
 
-    if ((this.enemyPos.x >= this.canvasSize.w - this.enemySize.w || this.enemyPos.x < 0) || (choca)) {
+    if ((this.enemyPos.x >= this.canvasSize.w - this.enemySize.w || this.enemyPos.x < 0) || (crash)) {
         this.changeDirection()
     }
 

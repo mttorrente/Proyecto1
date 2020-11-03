@@ -7,20 +7,20 @@ const Game = {
   canvasTag: undefined,
   ctx: undefined,
   canvasSize: {
-      w: undefined,
-      h: undefined
+    w: undefined,
+    h: undefined
   },
   frames: 0,
   keys: {
     top: 'ArrowUp',
-    bottom:'ArrowDown',
+    bottom: 'ArrowDown',
     left: 'ArrowLeft',
     right: 'ArrowRight'
   },
   player: undefined,
   popino: undefined,
   enemy: [],
-  wall:[],
+  wall: [],
 
   init(id) {
     this.canvasTag = document.getElementById(id);
@@ -29,7 +29,7 @@ const Game = {
     this.createPlayer()
     this.createPopino()
     this.createChest()
-    this.drawAll() 
+    this.drawAll()
     this.setEventListeners()
     this.generateEnemy()
     this.createWall()
@@ -54,32 +54,32 @@ const Game = {
       switch (e.key) {
         case this.keys.top:
               
-              trackPosY = this.player.playerPos.y  
-          if (!this.touchesWalls({ ...this.player, playerPos:{x:this.player.playerPos.x , y: trackPosY - trackSpeed }})) {
-            console.log("top")
+          trackPosY = this.player.playerPos.y
+          if (!this.touchesWalls({ ...this.player, playerPos: { x: this.player.playerPos.x, y: trackPosY - trackSpeed } })) {
+            
             this.player.move('top')
                     
-          } 
+          }
           break;
         case this.keys.left:
-          trackPosX = this.player.playerPos.x    
-          if (!this.touchesWalls({ ...this.player, playerPos:{x:trackPosX - trackSpeed , y: this.player.playerPos.y }})) {
-            console.log("left")
+          trackPosX = this.player.playerPos.x
+          if (!this.touchesWalls({ ...this.player, playerPos: { x: trackPosX - trackSpeed, y: this.player.playerPos.y } })) {
+            
             this.player.move('left')
             
           }
           break;
         case this.keys.right:
-          trackPosX = this.player.playerPos.x       
-          if (!this.touchesWalls({ ...this.player, playerPos:{x:trackPosX + trackSpeed , y: this.player.playerPos.y }})) {
+          trackPosX = this.player.playerPos.x
+          if (!this.touchesWalls({ ...this.player, playerPos: { x: trackPosX + trackSpeed, y: this.player.playerPos.y } })) {
 
             this.player.move('right')
                        
           }
           break;
         case this.keys.bottom:
-          trackPosY = this.player.playerPos.y          
-          if (!this.touchesWalls({ ...this.player, playerPos:{x:this.player.playerPos.x , y: trackPosY + trackSpeed }}))  {
+          trackPosY = this.player.playerPos.y
+          if (!this.touchesWalls({ ...this.player, playerPos: { x: this.player.playerPos.x, y: trackPosY + trackSpeed } })) {
             this.player.move('bottom')
                         
           }
@@ -96,19 +96,19 @@ const Game = {
 
     this.wall.push(wall1, wall2, wall3)
     
- },
+  },
 
   createPlayer() {
 
-    this.player = new Player (this.ctx, 210, 500, 70, 70, "player.png");
+    this.player = new Player(this.ctx, 210, 500, 70, 70, "player.png");
   },
   createPopino() {
 
-    this.popino = new Popino (this.ctx, 950, 20, 50, 50, "popino.png");
+    this.popino = new Popino(this.ctx, 950, 20, 50, 50, "popino.png");
   },
   createChest() {
 
-    this.chest = new Chest (this.ctx, 950, 500, 50, 50, "chest.png");
+    this.chest = new Chest(this.ctx, 950, 500, 50, 50, "chest.png");
   },
   
   generateEnemy() {
@@ -120,25 +120,25 @@ const Game = {
   },
   
   drawAll() {
-    setInterval(() => {
-    this.frames++
-    this.clearScreen()
-    this.player.draw()
-    this.popino.draw()
-    this.chest.draw()
-    this.enemy.forEach(elm => elm.draw())
-    this.wall.forEach(elm => elm.draw())
-    this.moveEnemyWall(this.enemy)
-  
+    this.interval = setInterval(() => {
+      this.frames++
+      this.clearScreen()
+      this.player.draw()
+      this.popino.draw()
+      this.chest.draw()
+      this.enemy.forEach(elm => elm.draw())
+      this.wall.forEach(elm => elm.draw())
+      this.moveEnemyWall(this.enemy)
+      //this.enemyCatchPlayer(this.player) ? this.gameOver(): null
     }, 70)
   },
   
   clearScreen() {
     this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
-},
+  },
   touchesWalls(player) {
   
-     return this.wall.some(wall => this.isCollision(player, wall));
+    return this.wall.some(wall => this.isCollision(player, wall));
   },
 
   isCollision(player, wall) {
@@ -162,11 +162,28 @@ const Game = {
   isCollisionEnemy(enemy, wall) {
     return (
     
-      enemy.enemyPos.x +enemy.enemySize.w >= wall.wallPos.x &&
+      enemy.enemyPos.x + enemy.enemySize.w >= wall.wallPos.x &&
       enemy.enemyPos.x < wall.wallPos.x + wall.wallSize.w &&
       enemy.enemyPos.y + enemy.enemySize.h >= wall.wallPos.y &&
       enemy.enemyPos.y < wall.wallPos.y + wall.wallSize.h
     );
-  }
+  },
 
+  isCollisionPlayer(enemy, player) {
+    //return this.enemy.some(enemy => {
+      return (
+    
+      enemy.enemyPos.x + enemy.enemySize.w >= player.playerPos.x &&
+      enemy.enemyPos.x < player.playerPos.x + player.playerSize.w &&
+      enemy.enemyPos.y + enemy.enemySize.h >= player.playerPos.y &&
+      enemy.enemyPos.y < player.playerPos.y + player.playerSize.h
+      );
+  },
+   enemyCatchPlayer(player) {
+    return this.enemy.some(enemy => this.isCollisionPlayer(enemy, player));
+  },
+  
+  // gameOver() {
+  //   alert ("Has Perdido a Popino");
+  // }
 } 

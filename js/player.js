@@ -25,27 +25,13 @@ class Player {
     this.ctx.drawImage(this.playerInstance, this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h)
   }
   
-  // move(dir) {
-  //   if (dir === 'top' && this.isCollision() === false) {
-  //     this.playerPos.y -= 20;
-  //   }
-  //   if (dir === 'bottom' && this.isCollision() === false) {
-  //     this.playerPos.y += 20;
-  //   }
-  //   if (dir === 'left' && this.isCollision() === false) {
-  //     this.playerPos.x -= 20;
-  //   }
-  //   if (dir === 'right' && this.isCollision() === false) {
-  //     this.playerPos.x += 20;
-  //   }
-  // }
-  
-
   move(dir) {
-    
-    dir === 'top' ? this.playerPos.y -= this.playerSpeed : null; 
-    dir === 'bottom' ? this.playerPos.y += this.playerSpeed  : null;
-    dir === 'left' ? this.playerPos.x -= this.playerSpeed  : null;
-    dir === 'right' ? this.playerPos.x += this.playerSpeed : null;
-  }
+
+      dir === 'top' ? this.playerPos.y -= this.playerSpeed : null; 
+      dir === 'bottom' ? this.playerPos.y += this.playerSpeed  : null;
+      dir === 'left' ? this.playerPos.x -= this.playerSpeed  : null;
+      dir === 'right' ? this.playerPos.x += this.playerSpeed : null;
+
+    }
+  
 }

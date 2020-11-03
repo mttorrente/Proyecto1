@@ -2,5 +2,5 @@
     border: 3px solid black;
     margin: 60px  auto 0;
     display: block;
-    background-color: rgb(73, 72, 72);
+    background-image: url(../img/dungeon.png);
 }
