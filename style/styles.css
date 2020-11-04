@@ -2,10 +2,8 @@
     border: 3px solid black;
     margin: 60px  auto 0;
     display: block;
-    background-image: url(../img/dungeon.png);
+    background-image: url(../img/dungeon.png)
 }
-
 body{
-    background-image: url(../img/fondo.jpg);
+    background-image: url(../img/background.jpeg);
 }
-

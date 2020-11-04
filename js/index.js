@@ -19,21 +19,31 @@ const Game = {
   },
   player: undefined,
   popino: undefined,
+  chest: undefined,
+  door: undefined,
   enemy: [],
+  randomEnemy: [],
   wall: [],
+  key: false,
+  lock: false,
 
   init(id) {
+    
     this.canvasTag = document.getElementById(id);
     this.ctx = this.canvasTag.getContext('2d');
-    this.setDimensions()
+    this.setDimensions()  
+    this.start()  
+  },
+  start(){
+    this.reset()
     this.createPlayer()
     this.createPopino()
     this.createChest()
+    this.createWall() 
+    this.createDoor() 
     this.drawAll()
     this.setEventListeners()
-    this.generateEnemy()
-    this.createWall()
-    
+    this.generateEnemy()  
   },
 
   setDimensions() {
@@ -54,11 +64,12 @@ const Game = {
         case this.keys.top:
               
           trackPosY = this.player.playerPos.y
-          if (!this.touchesWalls({ ...this.player, playerPos: { x: this.player.playerPos.x, y: trackPosY - trackSpeed } })) {
+          if (!this.touchesWalls ({ ...this.player, playerPos: { x: this.player.playerPos.x, y: trackPosY - trackSpeed } })) {
             
-            this.player.move('top')
-                    
+            !this.lock ? this.player.move('top'): null
+          
           }
+      
           break;
         case this.keys.left:
           trackPosX = this.player.playerPos.x
@@ -91,8 +102,8 @@ const Game = {
   createWall() {
     const wall1 = new Wall(this.ctx, 0, 0, 1050, 70, 'bricks1.png')
     const wall2 = new Wall(this.ctx, 0, 0, 10, 700, 'bricks1.png')
-    const wall3 = new Wall(this.ctx, 1040, 0, 100, 700, 'bricks1.png')
-    const wall4 = new Wall(this.ctx, 0, 650, 440, 700, 'bricks1.png')
+    const wall3 = new Wall(this.ctx, 1040, 0, 10, 700, 'bricks1.png')
+    const wall4 = new Wall(this.ctx, 0, 650, 440, 70, 'bricks1.png')
     const wall5 = new Wall(this.ctx, 610, 650, 440, 70, 'bricks1.png')
     const wall6 = new Wall(this.ctx, 870, 420, 80, 100, 'bricks1.png')
     const wall7 = new Wall(this.ctx, 870, 140, 80, 100, 'bricks1.png')
@@ -106,7 +117,8 @@ const Game = {
     const wall15 = new Wall(this.ctx, 360, 500, 400, 10, 'bricks1.png')
     const wall16 = new Wall(this.ctx, 720, 320, 50, 180, 'bricks1.png')
     const wall17 = new Wall(this.ctx, 720, 50, 50, 180, 'bricks1.png')
-    this.wall.push(wall1, wall2, wall3, wall4, wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12, wall13, wall14, wall15, wall16, wall17)
+
+    this.wall.push(wall1, wall2, wall3, wall4,wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12,wall13,wall14,wall15, wall16,wall17)
     
   },
 
@@ -116,34 +128,55 @@ const Game = {
   },
   createPopino() {
 
-    this.popino = new Popino(this.ctx, 290, 250, 50, 50, "popino.png");
+    this.popino = new Popino(this.ctx, 290, 250, 50, 50, "popino.png", 3,'x');
   },
   createChest() {
 
-    this.chest = new Chest(this.ctx, 960, 50, 50, 50, "chest.png");
+    this.chest = new Chest(this.ctx, 960, 72, 50, 50, "chest.png");
+  },
+  createDoor() {
+
+    this.door = new Door(this.ctx, 270, 340, 90, 80, "doors.png");
   },
   
-  generateEnemy() {
-    const enemy1 = new Enemy(this.ctx, this.canvasSize, 15, 72, 70, 70, 4, 'enemy.png')
-    const enemy2 = new Enemy(this.ctx, this.canvasSize, 600, 240, 70, 70, 7, 'enemy.png')
-    const enemy3 = new Enemy(this.ctx, this.canvasSize, 15, 520, 70, 70, 3, 'enemy.png')
+    generateEnemy() {
+    const enemy1 = new Enemy(this.ctx, this.canvasSize, 15, 72, 70, 70, 4, 'x', 'enemy.png')
+    const enemy2 = new Enemy(this.ctx, this.canvasSize, 600, 240, 70, 70, 7, 'x','enemy.png')
+    const enemy3 = new Enemy(this.ctx, this.canvasSize, 15, 400, 70, 70, 7, 'x','enemy.png')
+    const enemy4 = new Enemy(this.ctx, this.canvasSize, 15, 510, 70, 70, 3, 'x','enemy.png')
+    const enemy5 = new Enemy(this.ctx, this.canvasSize, 790, 72, 70, 70, 3, 'y','enemy.png')
+    const enemy6 = new Enemy(this.ctx, this.canvasSize, 590, 72, 70, 70, 2, 'y','enemy.png')
+    const enemy7 = new Enemy(this.ctx, this.canvasSize, 960, 570, 70, 70, 7, 'x','enemy.png')
+    const enemy8 = new Enemy(this.ctx, this.canvasSize, 960, 72, 70, 70, 2, 'y','enemy.png')
+  
+    this.randomEnemy.push(enemy1, enemy2, enemy3,enemy4, enemy5, enemy6,enemy7,enemy8)
+    this.shuffleArray(this.randomEnemy)
+    this.enemy.push(this.randomEnemy[0],this.randomEnemy[1], this.randomEnemy[2], this.randomEnemy[3], this.randomEnemy[4])
 
-    this.enemy.push(enemy1, enemy2, enemy3)
+  },
+  shuffleArray(array){
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [array[i],array[j]]=[array[j],array[i]];
+    }
   },
   
   drawAll() {
-    interval = setInterval(() => {
+    this.interval = setInterval(() => {
       this.frames++
       this.clearScreen()
       this.player.draw()
       this.popino.draw()
       this.chest.draw()
+      this.door.draw()
       this.enemy.forEach(elm => elm.draw())
       this.wall.forEach(elm => elm.draw())
       this.moveEnemyWall(this.enemy)
-      //this.enemyCatchPlayer(this.player) ? this.gameOver(): null
+      this.enemyCatchPlayer(this.player) ? this.gameOver(): null
+      this.playerGetKey()
+      this.playerOpenDoor()
+      this.freePopino()
     }, 70)
-    
   },
   
   clearScreen() {
@@ -183,7 +216,6 @@ const Game = {
   },
 
   isCollisionPlayer(enemy, player) {
-
       return (
     
       enemy.enemyPos.x + enemy.enemySize.w >= player.playerPos.x &&
@@ -192,13 +224,66 @@ const Game = {
       enemy.enemyPos.y < player.playerPos.y + player.playerSize.h
       );
   },
-   enemyCatchPlayer(player) {
+
+playerGetChest() {
+  return (
+    this.chest.chestPos.x + this.chest.chestSize.w >= this.player.playerPos.x &&
+    this.chest.chestPos.x < this.player.playerPos.x + this.player.playerSize.w &&
+    this.chest.chestPos.y + this.chest.chestSize.h >= this.player.playerPos.y &&
+    this.chest.chestPos.y < this.player.playerPos.y + this.player.playerSize.h
+    ); 
+  
+},
+playerGetKey() {
+     if(this.playerGetChest()){
+      this.key=true
+    } 
+    
+},
+playerGetDoor() {
+  return (
+    this.door.doorPos.x + this.door.doorSize.w >= this.player.playerPos.x &&
+    this.door.doorPos.x < this.player.playerPos.x + this.player.playerSize.w &&
+    this.door.doorPos.y + this.door.doorSize.h >= this.player.playerPos.y &&
+    this.door.doorPos.y < this.player.playerPos.y + this.player.playerSize.h
+    ); 
+
+  
+},
+ playerOpenDoor() {
+   if (this.playerGetDoor() && this.key === false){
+    this.lock = true
+   }
+  else if(!this.playerGetDoor()){
+    this.lock = false
+  }
+  },
+playerGetPopino() {
+  return (
+    this.popino.popinoPos.x + this.popino.popinoSize.w >= this.player.playerPos.x &&
+    this.popino.popinoPos.x < this.player.playerPos.x + this.player.playerSize.w &&
+    this.popino.popinoPos.y + this.popino.popinoSize.h >= this.player.playerPos.y &&
+    this.popino.popinoPos.y < this.player.playerPos.y + this.player.playerSize.h
+    ); 
+  },
+  freePopino() {
+    if (this.playerGetPopino()) {
+      this.popino.move(500,570);
+    }
+
+  },
+  enemyCatchPlayer(player) {
     return this.enemy.some(enemy => this.isCollisionPlayer(enemy, player));
   },
   
-  // gameOver() {
-  //   alert ("Has Perdido a Popino");
-  // }
+  gameOver() {
+    clearInterval(this.interval);
+    alert('Has perdido')
+    this.start()
+   },
   
-   
+  reset() {
+    this.enemy=[]
+   }
+  
 } 

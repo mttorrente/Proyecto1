@@ -1,5 +1,5 @@
 class Enemy {
-  constructor(ctx, canvasSize, enemyPosX, enemyPosY, enemyWidth, enemyHeight, speed, enemyImage) {
+  constructor(ctx, canvasSize, enemyPosX, enemyPosY, enemyWidth, enemyHeight, speed, direction, enemyImage) {
     this.ctx = ctx
       
     this.canvasSize = {
@@ -17,6 +17,7 @@ class Enemy {
     this.imageName = enemyImage
     this.imgeInstance = undefined
     this.speed = speed
+    this.direction = direction
     this.init()
     
   }
@@ -32,16 +33,21 @@ class Enemy {
 
   moveEnemy(crash) {
 
-    if ((this.enemyPos.x >= this.canvasSize.w - this.enemySize.w || this.enemyPos.x < 0) || (crash)) {
+    if ((crash)) {
         this.changeDirection()
     }
-
+    if (this.direction === 'x'){
       this.enemyPos.x += this.speed
-      
     }
+    else {
+      this.enemyPos.y += this.speed
+    }
+    }
+    
   changeDirection() {
     this.speed *= -1
         
   }
+    
     
 }
