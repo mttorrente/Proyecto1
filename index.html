@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=New+Rocker&family=Press+Start+2P&family=Rakkas&family=Rye&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/styles.css"/>
     <title>Document</title>
     
@@ -11,8 +12,33 @@
 </head>
 
 <body>
+    <div class="game-intro">
+        <div class="logo">
+            <img src="./img/logo.png" alt="The Legend of Popino"/>
+            <div class="instrucciones">
+            <p>Unos orcos malvados han secuestrado al pobre Popino.<br> Libéralo antes de que lo conviertan en su cena.</p>
+            <h3>Instrucciones</h3>
+                <p>Utiliza las flechas de movimiento para sortear a los enemigos.</p>
+                <p>Para abrir la mazmorra la llave deberá estar en tu poder.</p>
+                <h3>¡FUEGOTE!</h3>
+            </div>
+            <input id="start-button" type="button" value="Start" />
+        </div>
+    </div> 
+    <div class="game-over hidden">
+        <div class="logo">
+            <img src="./img/logo.png" alt="The Legend of Popino" />
+            <div class= "fin">
+                <h2>GAME OVER</h>
+            </div>
+            <input id="end-button" type="button" value="Try Again" />
+        </div>
+    </div>
 
-    <canvas id="myCanvas"></canvas>
+    
+
+
+    <canvas id="myCanvas" class="hidden"></canvas>
 
     
     <script src="js/dungeon.js"></script>
@@ -21,9 +47,11 @@
     <script src="js/door.js"></script>
     <script src="js/enemies.js"></script>
     <script src="js/player.js"></script>
-    <script src="js/index.js"></script>
+    <!-- <script src="js/intro.js"></script> -->
     <script src="js/game.js"></script>
-
+    <script src="js/index.js"></script>
+    
+    
 </body>
 
 </html>
