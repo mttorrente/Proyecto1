@@ -1,7 +1,7 @@
 const Game = {
 
-  name: 'Drawing app',
-  description: 'Canvas app for basic shapes drawing',
+  name: 'The Legend of Popino',
+  description: 'The Legend of Popino',
   version: '1.0.0',
   license: undefined,
   author: 'Isabel Pérez / Teresa Torrente',
@@ -30,6 +30,11 @@ const Game = {
     wall: [],
     key: false,
     lock: false,
+    audio: {
+      gameSound: new Audio("audio/POL-horror-tale-short.wav"),
+      winSound: new Audio("audio/POL-chubby-cat-short.wav"),
+      gameOverSound: new Audio("audio/POL-evil-throne-short.wav")
+    },
   
   init(id) {
       
@@ -52,11 +57,14 @@ const Game = {
               
     })
 
-    document.getElementById('winSound').pause()
-    document.getElementById('gameOverSound').pause()
-    document.getElementById('gameSound').play()
+    // document.getElementById('winSound').pause()
+    // document.getElementById('gameOverSound').pause()
+   // document.getElementById('gameSound').play()
+    this.audio.gameOverSound.pause()
+    this.audio.winSound.pause()
+    
      
-     this.start()  
+     this.start(); 
   },
 
   start() {
@@ -69,7 +77,8 @@ const Game = {
     this.createDoor() 
     this.drawAll()
     this.setEventListeners()
-    this.generateEnemy()  
+    this.generateEnemy() 
+    this.audio.gameSound.play()
   
   },
   
@@ -133,26 +142,27 @@ const Game = {
   
   createWall() {
 
-    const wall1 = new Wall(this.ctx, 0, 0, 1050, 70, 'bricks1.png')
-    const wall2 = new Wall(this.ctx, 0, 0, 10, 700, 'bricks1.png')
-    const wall3 = new Wall(this.ctx, 1040, 0, 10, 700, 'bricks1.png')
-    const wall4 = new Wall(this.ctx, 0, 670, 440, 70, 'bricks1.png')
-    const wall5 = new Wall(this.ctx, 610, 670, 440, 70, 'bricks1.png')
-    const wall6 = new Wall(this.ctx, 870, 420, 80, 100, 'bricks1.png')
-    const wall7 = new Wall(this.ctx, 870, 140, 80, 100, 'bricks1.png')
-    const wall8 = new Wall(this.ctx, 110, 150, 80, 250, 'bricks1.png')
-    const wall9 = new Wall(this.ctx, 420, 150, 80, 250, 'bricks1.png')
-    const wall10 = new Wall(this.ctx, 110, 150, 400, 40, 'bricks1.png')
-    const wall11 = new Wall(this.ctx, 110, 310, 150, 80, 'bricks1.png')
-    const wall12 = new Wall(this.ctx, 370, 310, 80, 80, 'bricks1.png')
-    const wall13 = new Wall(this.ctx, 20, 150, 70, 10, 'bricks1.png')
-    const wall14 = new Wall(this.ctx, 0, 500, 240, 10, 'bricks1.png')
-    const wall15 = new Wall(this.ctx, 370, 500, 380, 10, 'bricks1.png')
-    const wall16 = new Wall(this.ctx, 720, 320, 50, 180, 'bricks1.png')
-    const wall17 = new Wall(this.ctx, 720, 50, 50, 180, 'bricks1.png')
-    const wall18 = new Wall(this.ctx, 960, 52, 50, 50, 'bricks1.png')
+    const wall1 = new Wall(this.ctx, 0, 0, 1050, 70, 'bricks.png')
+    const wall2 = new Wall(this.ctx, 0, 0, 10, 700, 'bricks.png')
+    const wall3 = new Wall(this.ctx, 1040, 0, 10, 700, 'bricks.png')
+    const wall4 = new Wall(this.ctx, 0, 670, 440, 70, 'bricks.png')
+    const wall5 = new Wall(this.ctx, 610, 660, 440, 70, 'bricks.png')
+    const wall6 = new Wall(this.ctx, 870, 420, 80, 100, 'bricks.png')
+    const wall7 = new Wall(this.ctx, 870, 140, 80, 100, 'bricks.png')
+    const wall8 = new Wall(this.ctx, 110, 150, 80, 250, 'bricks.png')
+    const wall9 = new Wall(this.ctx, 420, 150, 80, 250, 'bricks.png')
+    const wall10 = new Wall(this.ctx, 110, 150, 400, 40, 'bricks.png')
+    const wall11 = new Wall(this.ctx, 110, 310, 150, 80, 'bricks.png')
+    const wall12 = new Wall(this.ctx, 370, 310, 80, 80, 'bricks.png')
+    const wall13 = new Wall(this.ctx, 20, 150, 70, 10, 'bricks.png')
+    const wall14 = new Wall(this.ctx, 0, 500, 240, 10, 'bricks.png')
+    const wall15 = new Wall(this.ctx, 370, 500, 380, 10, 'bricks.png')
+    const wall16 = new Wall(this.ctx, 720, 320, 50, 180, 'bricks.png')
+    const wall17 = new Wall(this.ctx, 720, 50, 50, 180, 'bricks.png')
+    const wall18 = new Wall(this.ctx, 960, 61, 50, 50, 'bricks.png')
+    const wall19 = new Wall(this.ctx, 100, 70, 10, 50, 'bricks.png')
   
-    this.wall.push(wall1, wall2, wall3, wall4,wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12,wall13,wall14,wall15, wall16,wall17,wall18)
+    this.wall.push(wall1, wall2, wall3, wall4,wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12,wall13,wall14,wall15, wall16,wall17,wall18,wall19)
       
   },
   
@@ -178,7 +188,7 @@ const Game = {
     
   generateEnemy() {
 
-    const enemy1 = new Enemy(this.ctx, this.canvasSize, 15, 72, 60, 60, 4, 'x', 'enemy.png')
+    const enemy1 = new Enemy(this.ctx, this.canvasSize, 120, 72, 60, 60, 4, 'x', 'enemy.png')
     const enemy2 = new Enemy(this.ctx, this.canvasSize, 600, 240, 60, 60, 7, 'x','enemy.png')
     const enemy3 = new Enemy(this.ctx, this.canvasSize, 15, 400, 60, 60, 7, 'x','enemy.png')
     const enemy4 = new Enemy(this.ctx, this.canvasSize, 15, 510, 60, 60, 3, 'x','enemy.png')
@@ -187,9 +197,9 @@ const Game = {
     const enemy7 = new Enemy(this.ctx, this.canvasSize, 960, 570, 60, 60, 7, 'x','enemy.png')
     const enemy8 = new Enemy(this.ctx, this.canvasSize, 960, 140, 60, 60, 2, 'y','enemy.png')
     
-    // this.randomEnemy.push(enemy1, enemy2, enemy3,enemy4, enemy5, enemy6,enemy7,enemy8)
-    // this.shuffleArray(this.randomEnemy)
-    // this.enemy.push(this.randomEnemy[0],this.randomEnemy[1], this.randomEnemy[2], this.randomEnemy[3], this.randomEnemy[4])
+    this.randomEnemy.push(enemy1, enemy2, enemy3,enemy4, enemy5, enemy6,enemy7,enemy8)
+    this.shuffleArray(this.randomEnemy)
+    this.enemy.push(this.randomEnemy[0],this.randomEnemy[1], this.randomEnemy[2], this.randomEnemy[3], this.randomEnemy[4])
   
   },
 
@@ -336,8 +346,10 @@ const Game = {
         clearInterval(this.interval);
         document.querySelector(".win").classList.toggle("hidden")
         document.querySelector("#myCanvas").classList.toggle("hidden")
-        document.getElementById('gameSound').pause()
-        document.getElementById('winSound').play()
+        // document.getElementById('gameSound').pause()
+        // document.getElementById('winSound').play()
+        this.audio.gameSound.pause()
+        this.audio.winSound.play()
       }
     }
   },
@@ -351,8 +363,10 @@ const Game = {
     clearInterval(this.interval);
     document.querySelector(".game-over").classList.toggle("hidden")
     document.querySelector("#myCanvas").classList.toggle("hidden")
-    document.getElementById('gameSound').pause()
-    document.getElementById('gameOverSound').play()
+    // document.getElementById('gameSound').pause()
+    // document.getElementById('gameOverSound').play()
+    this.audio.gameSound.pause()
+    this.audio.gameOverSound.play()
       
   },
     
