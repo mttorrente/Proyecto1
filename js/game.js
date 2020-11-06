@@ -60,8 +60,8 @@ const Game = {
     // document.getElementById('winSound').pause()
     // document.getElementById('gameOverSound').pause()
    // document.getElementById('gameSound').play()
-    this.audio.gameOverSound.pause()
-    this.audio.winSound.pause()
+    // this.audio.gameOverSound.pause()
+    // this.audio.winSound.pause()
     
      
      this.start(); 
@@ -78,6 +78,8 @@ const Game = {
     this.drawAll()
     this.setEventListeners()
     this.generateEnemy() 
+    this.audio.winSound.pause()
+    this.audio.gameOverSound.pause()
     this.audio.gameSound.play()
   
   },
@@ -159,7 +161,7 @@ const Game = {
     const wall15 = new Wall(this.ctx, 370, 500, 380, 10, 'bricks.png')
     const wall16 = new Wall(this.ctx, 720, 320, 50, 180, 'bricks.png')
     const wall17 = new Wall(this.ctx, 720, 50, 50, 180, 'bricks.png')
-    const wall18 = new Wall(this.ctx, 960, 61, 50, 50, 'bricks.png')
+    const wall18 = new Wall(this.ctx, 960, 57, 50, 50, 'bricks1.png')
     const wall19 = new Wall(this.ctx, 100, 70, 10, 50, 'bricks.png')
   
     this.wall.push(wall1, wall2, wall3, wall4,wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12,wall13,wall14,wall15, wall16,wall17,wall18,wall19)
@@ -197,9 +199,9 @@ const Game = {
     const enemy7 = new Enemy(this.ctx, this.canvasSize, 960, 570, 60, 60, 7, 'x','enemy.png')
     const enemy8 = new Enemy(this.ctx, this.canvasSize, 960, 140, 60, 60, 2, 'y','enemy.png')
     
-    this.randomEnemy.push(enemy1, enemy2, enemy3,enemy4, enemy5, enemy6,enemy7,enemy8)
-    this.shuffleArray(this.randomEnemy)
-    this.enemy.push(this.randomEnemy[0],this.randomEnemy[1], this.randomEnemy[2], this.randomEnemy[3], this.randomEnemy[4])
+    // this.randomEnemy.push(enemy1, enemy2, enemy3,enemy4, enemy5, enemy6,enemy7,enemy8)
+    // this.shuffleArray(this.randomEnemy)
+    // this.enemy.push(this.randomEnemy[0],this.randomEnemy[1], this.randomEnemy[2], this.randomEnemy[3], this.randomEnemy[4])
   
   },
 
