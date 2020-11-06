@@ -4,43 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=New+Rocker&family=Press+Start+2P&family=Rakkas&family=Rye&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/styles.css"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=New+Rocker&family=Press+Start+2P&family=Rakkas&family=Rye&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css" />
     <title>Document</title>
-    
+
 
 </head>
 
 <body>
     <div class="game-intro">
+        <div class="container"></div>
         <div class="logo">
-            <img src="./img/logo.png" alt="The Legend of Popino"/>
+            <img src="./img/logo.png" alt="The Legend of Popino" />
             <div class="instrucciones">
-            <p>Unos orcos malvados han secuestrado al pobre Popino.<br> Libéralo antes de que lo conviertan en su cena.</p>
-            <h3>Instrucciones</h3>
+                <p>Unos orcos malvados han secuestrado al pobre Popino.<br> Libéralo antes de que lo conviertan en su
+                    cena.</p>
+                <h3>Instrucciones</h3>
                 <p>Utiliza las flechas de movimiento para sortear a los enemigos.</p>
                 <p>Para abrir la mazmorra la llave deberá estar en tu poder.</p>
                 <h3>¡FUEGOTE!</h3>
             </div>
             <input id="start-button" type="button" value="Start" />
         </div>
-    </div> 
+    </div>
     <div class="game-over hidden">
-        <div class="logo">
-            <img src="./img/logo.png" alt="The Legend of Popino" />
-            <div class= "fin">
-                <h2>GAME OVER</h>
+        <div class="container">
+            <div class="logo">
+                <img src="./img/logo.png" alt="The Legend of Popino" />
+                <div class="fin">
+                    <h2>GAME OVER</h2>
+                </div>
+                <input id="end-button" type="button" value="Try Again" />
             </div>
-            <input id="end-button" type="button" value="Try Again" />
+
+        </div>
+    </div>
+    <div class="win hidden">
+        <div class="container">
+            <div class="logo">
+                <img src="./img/logo.png" alt="The Legend of Popino" />
+                <div class="fin">
+                    <h3>¡HAS RECATADO A POPINO!</h3>
+                </div>
+                <input id="win-button" type="button" value="start" />
+            </div>
+
         </div>
     </div>
 
-    
+
 
 
     <canvas id="myCanvas" class="hidden"></canvas>
 
-    
+    <audio id="gameSound" src="./audio/POL-horror-tale-short.wav" autoplay loop></audio>
+    <audio id="gameOverSound" src="./audio/POL-evil-throne-short.wav" autoplay loop></audio>
+    <audio id="winSound" src="./audio/POL-chubby-cat-short.wav" autoplay loop></audio>
+
     <script src="js/dungeon.js"></script>
     <script src="js/popino.js"></script>
     <script src="js/chest.js"></script>
@@ -50,8 +72,8 @@
     <!-- <script src="js/intro.js"></script> -->
     <script src="js/game.js"></script>
     <script src="js/index.js"></script>
-    
-    
+
+
 </body>
 
 </html>

@@ -9,9 +9,16 @@ class Popino {
         w: popinoWidth,
         h: popinoHeight
       },
-      this.imageName = popinoImage
       this.popinoInstance = undefined
-      this.init()
+      this.popinoSpeed = 20
+      this.image = new Image();
+      this.image.src = popinoImage;
+      this.image.framesIndex = 0
+      this.image.frames = 3
+      this.image.width = 136
+      this.image.height = 42
+      this.width = popinoWidth;
+      this.height = popinoHeight;
       
       this.speed = speed
       this.direction = direction
@@ -23,23 +30,41 @@ class Popino {
       
     }
   
-    draw() {
-      this.ctx.drawImage(this.popinoInstance, this.popinoPos.x, this.popinoPos.y, this.popinoSize.w, this.popinoSize.h)
-    }
-  
+    draw(frames) {
+        const dx = this.image.framesIndex * Math.floor(this.image.width / this.image.frames)
+        const dy = 0
+        const dwidth = Math.floor(this.image.width / this.image.frames)
+        const dheight = this.image.height
+        const sx= this.popinoPos.x
+        const sy= this.popinoPos.y
+        const swidth = this.popinoSize.w
+        const sheight = this.popinoSize.h
+    
+        this.ctx.drawImage(this.image, dx, dy ,dwidth, dheight, sx, sy, swidth, sheight)
+        this.animate(frames)
+    
+      }
+      animate(frames) {
+        if (frames % 5 == 0) {
+          this.image.framesIndex++;
+        }
+        if (this.image.framesIndex > this.image.frames - 1) {
+          this.image.framesIndex = 0;
+        }
+      }
   move(x, y) {
     setTimeout(() => {
       if (this.popinoPos.y < y) {
         this.popinoPos.y += this.speed;
-        console.log(this.popinoPos.y, y);
       }
       if (this.popinoPos.y >= y && this.popinoPos.x < x) {
-        console.log()
         this.popinoPos.x += this.speed;
       }
     }, 20);
-    if (this.popinoPos.x === x && this.popinoPos.y-1 === y) {
-      alert("Has rescatado a Popino!");
+    if (this.popinoPos.x > (x-10) && this.popinoPos.y > (y-10)) {
+        return true
+        
+      //alert("Has rescatado a Popino!");
     }
   }
     

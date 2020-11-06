@@ -1,6 +1,4 @@
 #myCanvas {
-
-    border: 3px solid black;
     margin: 0 auto;
     position: absolute;
     top: 10%;
@@ -9,7 +7,7 @@
 }
 
 body{
-    background-image: url(../img/background.jpeg);
+    background-image: url(../img/fondo2.jpg);
     margin: 0;
     /* font-family: 'Cinzel Decorative'; */
     font-family: 'New Rocker';
@@ -18,6 +16,7 @@ body{
     letter-spacing: 2px;
     line-height: 1.5em;
 }
+
 p {
     margin: 10px 0;
     text-align: center;
@@ -30,7 +29,6 @@ h3{
     margin: 15px 0px;
     text-align: center;
 }
-
 
 .game-intro{
    position: absolute;
@@ -61,6 +59,7 @@ h3{
     width: 100%;
    
 }
+
 .instrucciones {
     width: 600px;
     padding-top: 10px;
@@ -80,15 +79,45 @@ h3{
     color: #fff;
 }
 
-.game-over{
-     
-     width: 100%;
-     height: 100%;
-     margin: 0;
-     /* background-image: url(../img/portada.png); */
-     /* background-repeat: no-repeat;
-     background-position: center; */
-  
-     justify-content: center;
-     }
+.container {
+    display: flex;
+    justify-content: center;
+}
 
+h2 {
+    font-size: 3em;
+    text-align: center;
+}
+
+.game-over{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+    
+}
+     
+#end-button {
+    display: block;
+    width: 300px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    font-family: 'Rye';
+    font-size: 2em;
+    background-color: rgb(72, 88, 43);
+    text-transform: uppercase;
+    color: #fff;
+}
+#win-button {
+    display: block;
+    width: 300px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    font-family: 'Rye';
+    font-size: 2em;
+    background-color: rgb(72, 88, 43);
+    text-transform: uppercase;
+    color: #fff;
+}
