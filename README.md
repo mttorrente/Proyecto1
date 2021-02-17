@@ -1,7 +1,7 @@
 # The Legend of Popino
-<img src="https://mttorrente.github.io/The-Legend-of-Popino/" alt="The Legend of Popino">
+https://github.com/mttorrente/The-Legend-of-Popino/issues/1#issue-810339838
 
-## Developers ✒️
+## Developers 🚀
 * **Teresa Torrente** 
 * **Isabel Pérez** 
 
@@ -11,19 +11,19 @@
 * [CSS3](https://developer.mozilla.org/en-US/docs/Archive/CSS3) 
 * [Javascript (ES6)](https://www.w3schools.com/js/js_es6.asp) 
 
-## Description
+## Description 📄
 One single player PC Video-game.
 Survive to rescue Popino the dog from a dark dungeon before it's too late to win!
 
-## How to play
+## How to play 🎮
 * On your PC or Laptop go to the following URL https://mttorrente.github.io/The-Legend-of-Popino/
 * Press _START_ to play
 * Use the _arrow keys_ to move left and right to reach the dungeon key from the chest and avoid the enemies.
 * Retur to the dungeon, use the key to rescue Popino and run away together! 
   
-## Advice
+## Advice 🔊
 This game have sound so if don't want background music we recommend you to turn down your computer volume.
 
-## Acknowledgements
+## Acknowledgements🎖
  * Product Owner: Dayan Rojas
  * Lead Instructor: Germán Alvarez
