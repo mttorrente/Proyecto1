@@ -1,5 +1,5 @@
 # The Legend of Popino
-https://github.com/mttorrente/The-Legend-of-Popino/issues/1#issue-810339838
+![Captura de pantalla 2021-02-17 a las 17 13 23](https://user-images.githubusercontent.com/67802072/108236241-f5c65f80-7146-11eb-890d-1720b2adc8dd.png)
 
 ## Developers 🚀
 * **Teresa Torrente** 
