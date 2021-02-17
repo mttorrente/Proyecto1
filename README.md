@@ -1,4 +1,4 @@
-# The-Legend-of-Popino
+# The Legend of Popino
 <img src="https://mttorrente.github.io/The-Legend-of-Popino/" alt="The Legend of Popino">
 
 ## Developers ✒️
